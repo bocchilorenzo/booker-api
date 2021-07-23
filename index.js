@@ -70,6 +70,12 @@ fastify.get('/search', async function (request, reply) {
     }
 })
 
+fastify.get('/wake', async function (request, reply) {
+    reply.header("Access-Control-Allow-Origin", "https://booker.vercel.app");
+    reply.header("Access-Control-Allow-Methods", "GET");
+    reply.send({ status: 200, error: "Server active" })
+})
+
 fastify.listen(process.env.PORT, '0.0.0.0', function (err, address) {
     if (err) {
         fastify.log.error(err)
