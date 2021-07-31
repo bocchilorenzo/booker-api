@@ -22,9 +22,9 @@ async function search(settings) {
     try {
         const data = await libgen.search(settings)
         let n = data.length
-        let toRtn = { response: 404, results: [] }
+        let toRtn = { status: 404, results: [] }
         if (n != 0) {
-            toRtn.response = 200
+            toRtn.status = 200
             let coverId = ""
             while (n--) {
                 coverId = data[n].id
@@ -53,7 +53,7 @@ async function search(settings) {
         }
         return toRtn
     } catch (err) {
-        return { response: 500, results: [] }
+        return { status: 500, results: [] }
     }
 }
 
@@ -73,7 +73,7 @@ fastify.get('/search', async function (request, reply) {
 fastify.get('/wake', async function (request, reply) {
     reply.header("Access-Control-Allow-Origin", "https://booker.vercel.app");
     reply.header("Access-Control-Allow-Methods", "GET");
-    reply.send({ status: 200, error: "Server active" })
+    reply.send({ status: 200, msg: "Server active" })
 })
 
 fastify.listen(process.env.PORT, '0.0.0.0', function (err, address) {
